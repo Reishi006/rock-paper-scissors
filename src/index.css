@@ -1,0 +1,74 @@
+:root {
+  --fontBrown: rgb(114, 58, 32);
+  --fontWhite: blanchedalmond;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--fontWhite);
+  color: var(--fontBrown);
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.main-container {
+  margin: 0px auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 24px;
+}
+
+.main-container > * {
+  margin: 10px;
+}
+
+.start-btn {
+  margin: 20px;
+  padding: 20px;
+  background-color: burlywood;
+  color: var(--fontBrown);
+  border: 2px solid darkgoldenrod;
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.score {
+  margin: 30px;
+  column-count: 3;
+  color: var(--fontBrown);
+  list-style-type: none;
+  font-size: 28px;
+}
+
+.rock, .paper, .scissors {
+  font-weight: bolder;
+}
+
+.rock {
+  color: rgb(128, 119, 108);
+}
+
+.paper {
+  color: rgb(168, 161, 94);
+}
+
+.scissors {
+  color: brown;
+}
+
+.game-btn {
+  padding: 10px;
+  background-color: var(--fontBrown);
+  color: burlywood;
+  border: 2px solid darkgoldenrod;
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: 600;
+}
