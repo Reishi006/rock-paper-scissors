@@ -3,7 +3,7 @@ import {useState} from 'react';
 
 
 
-function Round({pick, score, opScore, setPick, setScore, setOpScore}) {
+function Round({pick, opPick, score, opScore, setPick, setOpPick, setScore, setOpScore}) {
     let choice = [
         'rock',
         'paper',
@@ -12,31 +12,63 @@ function Round({pick, score, opScore, setPick, setScore, setOpScore}) {
 
     let random = Math.floor(Math.random() * 3);
 
-    const calculateWinner = () => {
+    const calculateWinner = (p, r) => {
         if (score < 3 && opScore < 3) {
-            if (pick === choice[random]) {
-                console.log(`${choice[random]}`);
+            if (p === r) {
+                setPick(p);
+                setOpPick(r);
+
+                console.log(`You: ${p} vs Opponent: ${r}`);
                 random = Math.floor(Math.random() * 3);
-            } else if (pick === 'rock' && choice[random] === 'paper') {
+                return r;
+            } else if (p === 'rock' && r === 'paper') {
                 setOpScore(opScore + 1);
-            } else if (pick === 'rock' && choice[random] === 'scissors') {
+                setPick(p);
+                setOpPick(r);
+
+                console.log(`You: ${p} vs Opponent: ${r}`);
+                return r;
+            } else if (p === 'rock' && r === 'scissors') {
                 setScore(score + 1);
-            } else if (pick === 'paper' && choice[random] === 'rock') {
+                setPick(p);
+                setOpPick(r);
+
+                console.log(`You: ${p} vs Opponent: ${r}`);
+                return r;
+            } else if (p === 'paper' && r === 'rock') {
                 setScore(score + 1);
-            } else if (pick === 'paper' && choice[random] === 'scissors') {
+                setPick(p);
+                setOpPick(r);
+
+                console.log(`You: ${p} vs Opponent: ${r}`);
+                return r;
+            } else if (p === 'paper' && r === 'scissors') {
                 setOpScore(opScore + 1);
-            } else if (pick === 'scissors' && choice[random] === 'rock') {
+                setPick(p);
+                setOpPick(r);
+
+                console.log(`You: ${p} vs Opponent: ${r}`);
+                return r;
+            } else if (p === 'scissors' && r === 'rock') {
                 setOpScore(opScore + 1);
-            } else if (pick === 'scissors' && choice[random] === 'paper') {
+                setPick(p);
+                setOpPick(r);
+
+                console.log(`You: ${p} vs Opponent: ${r}`);
+                return r;
+            } else if (p === 'scissors' && r === 'paper') {
                 setScore(score + 1);
+                setPick(p);
+                setOpPick(r);
+
+                console.log(`You: ${p} vs Opponent: ${r}`);
+                return r;
             }
         } else return;
     };
-
     const choiceButton = choice.map((ch) =>{
         return <button key={ch} className="game-btn" onClick={() => {
-            setPick(ch);
-            calculateWinner();
+            calculateWinner(ch, choice[random]);
         }}>{ch.toUpperCase()}</button>
     });
 
@@ -55,7 +87,7 @@ function Round({pick, score, opScore, setPick, setScore, setOpScore}) {
 
                 <div className={pick}>{pick.toUpperCase()}</div>
                 <div></div>
-                <div className={choice[random]}>{choice[random].toUpperCase()}</div>
+                <div className={opPick}>{opPick.toUpperCase()}</div>
             </div>
             {choiceButton}
         </div>
@@ -101,7 +133,8 @@ function PlayAgain({score, opScore, setScore, setOpScore}) {
 }
 
 export default function Game() {
-    const [pick, setPick] = useState('rock');
+    const [pick, setPick] = useState('PLAY');
+    const [opPick, setOpPick] = useState('PLAY');
     const [score, setScore] = useState(0);
     const [opScore, setOpScore] = useState(0);
     
@@ -109,12 +142,14 @@ export default function Game() {
         <>
             {(score < 3 && opScore < 3) ?
             <Round 
-            pick={pick}
-            setPick={setPick}
-            score={score}
-            setScore={setScore}
-            opScore={opScore}
-            setOpScore={setOpScore}
+                pick={pick}
+                opPick={opPick}
+                setPick={setPick}
+                setOpPick={setOpPick}
+                score={score}
+                setScore={setScore}
+                opScore={opScore}
+                setOpScore={setOpScore}
             ></Round> 
             : ''}
             
@@ -123,10 +158,10 @@ export default function Game() {
 
             {(score === 3 || opScore === 3) ?
             <PlayAgain
-            score={score}
-            opScore={opScore}
-            setScore={setScore}
-            setOpScore={setOpScore}
+                score={score}
+                opScore={opScore}
+                setScore={setScore}
+                setOpScore={setOpScore}
             ></PlayAgain>
             : ''}
         </>
